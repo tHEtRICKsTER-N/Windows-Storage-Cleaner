@@ -13,4 +13,4 @@ Validated locally on Windows x64 on 2026-10-06 using .NET SDK 10.0.401. Self-con
 
 Advanced Windows maintenance operations were not run against the user's Windows installation. Test these operations, cross-version upgrades, shortcuts, accessibility, high-DPI layouts and Windows edition compatibility in disposable VMs before a public release. Native ARM64 is not covered.
 
-GitHub CI/release workflows are configured but have not run on a hosted repository. Release binaries are unsigned; no signing or SmartScreen reputation validation was performed.
+[The initial hosted Windows CI run passed](https://github.com/tHEtRICKsTER-N/Windows-Storage-Cleaner/actions/runs/37505235087). Subsequent CI and tag-packaging results are available under the repository Actions tab. Release binaries are unsigned; no signing or SmartScreen reputation validation was performed.

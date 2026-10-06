@@ -10,6 +10,8 @@ An MIT-licensed Windows desktop app for reviewing cache files, understanding sto
 
 ## Install
 
+Download v0.2.0: [Setup installer](https://github.com/tHEtRICKsTER-N/Windows-Storage-Cleaner/releases/download/v0.2.0/WindowsStorageCleaner-0.2.0-Setup-x64.exe) · [Portable ZIP](https://github.com/tHEtRICKsTER-N/Windows-Storage-Cleaner/releases/download/v0.2.0/WindowsStorageCleaner-0.2.0-win-x64.zip) · [SHA-256 checksums](https://github.com/tHEtRICKsTER-N/Windows-Storage-Cleaner/releases/download/v0.2.0/SHA256SUMS.txt)
+
 Use `WindowsStorageCleaner-0.2.0-Setup-x64.exe` for a per-user installation with Start menu shortcuts and an uninstaller. Administrator permission is not needed for setup or cache review. The installer bundles .NET.
 
 For portable use, extract the entire `WindowsStorageCleaner-0.2.0-win-x64.zip` and run `WindowsStorageCleaner.exe`. Keep its DLLs, runtime files, and maintenance helper together. Portable mode still stores preferences and cleanup journals under `%LOCALAPPDATA%\WindowsStorageCleaner`.
