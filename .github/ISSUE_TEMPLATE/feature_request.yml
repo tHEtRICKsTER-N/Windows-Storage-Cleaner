@@ -1,0 +1,13 @@
+name: Feature request
+description: Propose an improvement with its intended behavior.
+title: "[Feature] "
+body:
+  - type: textarea
+    attributes:
+      label: Problem and proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: User impact and safety
+      description: For cleanup rules, describe exact cache roots, rebuild behavior and official documentation.

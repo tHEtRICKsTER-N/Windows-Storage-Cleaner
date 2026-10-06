@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>WinExe</OutputType><UseWPF>true</UseWPF><AssemblyName>WindowsStorageCleaner.Maintenance</AssemblyName><ApplicationManifest>../Cleaner.App/app.manifest</ApplicationManifest></PropertyGroup>
+  <PropertyGroup><ApplicationIcon>../../assets/app.ico</ApplicationIcon></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Cleaner.Core/Cleaner.Core.csproj" /></ItemGroup>
+</Project>

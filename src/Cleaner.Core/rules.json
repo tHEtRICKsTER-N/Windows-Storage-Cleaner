@@ -1,0 +1,298 @@
+[
+  {
+    "id": "user-temp",
+    "version": 1,
+    "title": "Temporary files",
+    "relativePath": "Temp",
+    "patterns": [
+      "*.tmp",
+      "*.temp",
+      "*.log"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Review",
+    "explanation": "Only .tmp, .temp and .log files older than seven days. Review carefully: applications may retain useful work or diagnostic logs here.",
+    "category": "System caches"
+  },
+  {
+    "id": "directx",
+    "version": 1,
+    "title": "DirectX shader cache",
+    "relativePath": "D3DSCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "Compiled graphics shaders older than three days. Games may briefly stutter while rebuilding this cache.",
+    "category": "Graphics"
+  },
+  {
+    "id": "nvidia-dx",
+    "version": 1,
+    "title": "NVIDIA DirectX cache",
+    "relativePath": "NVIDIA\\DXCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "NVIDIA DirectX shader cache. Graphics applications recreate it; the first launch may be slower.",
+    "category": "Graphics"
+  },
+  {
+    "id": "nvidia-gl",
+    "version": 1,
+    "title": "NVIDIA OpenGL cache",
+    "relativePath": "NVIDIA\\GLCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "NVIDIA OpenGL shader cache. Graphics applications recreate it; the first launch may be slower.",
+    "category": "Graphics"
+  },
+  {
+    "id": "nvidia-compute",
+    "version": 1,
+    "title": "NVIDIA compute cache",
+    "relativePath": "NVIDIA\\ComputeCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "Compiled compute kernels. CUDA applications may take longer to start while rebuilding them.",
+    "category": "Graphics"
+  },
+  {
+    "id": "amd-dx",
+    "version": 1,
+    "title": "AMD DirectX cache",
+    "relativePath": "AMD\\DxCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "AMD DirectX shader cache. Games may briefly stutter while rebuilding this cache.",
+    "category": "Graphics"
+  },
+  {
+    "id": "amd-gl",
+    "version": 1,
+    "title": "AMD OpenGL cache",
+    "relativePath": "AMD\\GLCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 3,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "explanation": "AMD OpenGL shader cache. Graphics applications recreate it; the first launch may be slower.",
+    "category": "Graphics"
+  },
+  {
+    "id": "chrome-cache",
+    "version": 1,
+    "title": "Chrome website cache",
+    "relativePath": "Google\\Chrome\\User Data\\Default\\Cache\\Cache_Data",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile website cache only. Close Chrome first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "chrome-code",
+    "version": 1,
+    "title": "Chrome code cache",
+    "relativePath": "Google\\Chrome\\User Data\\Default\\Code Cache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile code cache only. Close Chrome first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "chrome-gpu",
+    "version": 1,
+    "title": "Chrome GPU cache",
+    "relativePath": "Google\\Chrome\\User Data\\Default\\GPUCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile GPU cache only. Close Chrome first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "edge-cache",
+    "version": 1,
+    "title": "Edge website cache",
+    "relativePath": "Microsoft\\Edge\\User Data\\Default\\Cache\\Cache_Data",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile website cache only. Close Edge first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "edge-code",
+    "version": 1,
+    "title": "Edge code cache",
+    "relativePath": "Microsoft\\Edge\\User Data\\Default\\Code Cache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile code cache only. Close Edge first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "edge-gpu",
+    "version": 1,
+    "title": "Edge GPU cache",
+    "relativePath": "Microsoft\\Edge\\User Data\\Default\\GPUCache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile GPU cache only. Close Edge first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "brave-cache",
+    "version": 1,
+    "title": "Brave website cache",
+    "relativePath": "BraveSoftware\\Brave-Browser\\User Data\\Default\\Cache\\Cache_Data",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile website cache only. Close Brave first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "brave-code",
+    "version": 1,
+    "title": "Brave code cache",
+    "relativePath": "BraveSoftware\\Brave-Browser\\User Data\\Default\\Code Cache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Browsers",
+    "explanation": "Default profile code cache only. Close Brave first. Cached content is regenerated. Cookies, saved passwords, bookmarks and browsing history are outside this rule."
+  },
+  {
+    "id": "npm-cache",
+    "version": 1,
+    "title": "npm package cache",
+    "relativePath": "npm-cache\\_cacache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 14,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Development",
+    "explanation": "Stop package installations first. Projects and node_modules are outside this rule. Packages may need downloading again."
+  },
+  {
+    "id": "pip-cache",
+    "version": 1,
+    "title": "pip download cache",
+    "relativePath": "pip\\Cache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 14,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Development",
+    "explanation": "Stop pip first. Environments and installed packages are outside this rule. Offline installs may lose cached downloads."
+  },
+  {
+    "id": "nuget-http",
+    "version": 1,
+    "title": "NuGet HTTP cache",
+    "relativePath": "NuGet\\v3-cache",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 14,
+    "recursive": true,
+    "risk": "Rebuildable",
+    "category": "Development",
+    "explanation": "Stop builds and restores first. The installed global-package folder is outside this rule."
+  },
+  {
+    "id": "thumbnails",
+    "version": 1,
+    "title": "Explorer thumbnail cache",
+    "relativePath": "Microsoft\\Windows\\Explorer",
+    "patterns": [
+      "thumbcache*.db"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": false,
+    "risk": "Rebuildable",
+    "category": "System caches",
+    "explanation": "Active databases are usually locked and are skipped. Explorer regenerates this cache when needed."
+  },
+  {
+    "id": "icons",
+    "version": 1,
+    "title": "Explorer icon cache",
+    "relativePath": "Microsoft\\Windows\\Explorer",
+    "patterns": [
+      "iconcache*.db"
+    ],
+    "minimumAgeDays": 7,
+    "recursive": false,
+    "risk": "Rebuildable",
+    "category": "System caches",
+    "explanation": "Active databases are usually locked and are skipped. Explorer regenerates this cache when needed."
+  },
+  {
+    "id": "error-reports",
+    "version": 1,
+    "title": "Archived error reports",
+    "relativePath": "Microsoft\\Windows\\WER\\ReportArchive",
+    "patterns": [
+      "*"
+    ],
+    "minimumAgeDays": 30,
+    "recursive": true,
+    "risk": "Review",
+    "category": "Diagnostics",
+    "explanation": "Archived Windows Error Reporting files older than thirty days. Removing them loses diagnostic evidence; keep reports needed for troubleshooting."
+  }
+]

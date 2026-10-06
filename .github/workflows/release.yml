@@ -1,0 +1,49 @@
+name: Draft release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: windows-2025
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: 10.0.x
+      - name: Validate tag
+        shell: pwsh
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          [xml]$props = Get-Content Directory.Build.props -Raw
+          $version = [string]$props.Project.PropertyGroup.Version
+          if ($env:RELEASE_TAG -cne "v$version") { throw 'Tag must match the project version.' }
+      - name: Build setup and portable packages
+        shell: pwsh
+        run: ./scripts/release.ps1
+      - name: Preserve build artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-packages
+          path: |
+            dist/v*/*.exe
+            dist/v*/*.zip
+            dist/v*/SHA256SUMS.txt
+          if-no-files-found: error
+      - name: Create draft GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          $files = @(Get-ChildItem "dist/$env:RELEASE_TAG" -File | ForEach-Object FullName)
+          gh release create $env:RELEASE_TAG @files --verify-tag --draft --title "Windows Storage Cleaner $env:RELEASE_TAG" --notes-file CHANGELOG.md
+          if ($LASTEXITCODE -ne 0) { throw 'Draft release creation failed.' }

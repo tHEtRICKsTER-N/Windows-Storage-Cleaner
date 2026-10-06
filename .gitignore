@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+*.user
+*.log
+work/
+dist/
+app/
+cli/
+*.pfx
+*.snk

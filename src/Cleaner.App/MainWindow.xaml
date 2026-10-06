@@ -1,0 +1,115 @@
+<Window x:Class="Cleaner.App.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Windows Storage Cleaner" Width="1340" Height="960" MinWidth="1120" MinHeight="800"
+        Background="{DynamicResource WindowBg}" Foreground="{DynamicResource Ink}" FontFamily="Segoe UI" FontSize="13" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+  <Grid Background="{DynamicResource WindowBg}">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="226" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+    <Border Background="{DynamicResource Sidebar}" Padding="20,27">
+      <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top">
+          <StackPanel Orientation="Horizontal"><Border Background="{DynamicResource Accent}" CornerRadius="10" Width="38" Height="38"><StackPanel Margin="9,9"><Rectangle Fill="White" Height="4" Margin="0,0,0,3" /><Rectangle Fill="White" Height="4" Width="14" HorizontalAlignment="Left" Margin="0,0,0,3" /><Rectangle Fill="White" Height="4" Width="9" HorizontalAlignment="Left" /></StackPanel></Border><TextBlock Text="WSC" Foreground="{DynamicResource SidebarInk}" FontWeight="Bold" FontSize="19" Margin="12,7,0,0" /></StackPanel>
+          <TextBlock Text="Storage Cleaner" Foreground="{DynamicResource SidebarInk}" FontSize="23" FontWeight="SemiBold" Margin="0,25,0,8" />
+          <TextBlock Text="Find space. Keep control." Foreground="{DynamicResource SidebarMuted}" FontSize="12" Margin="0,0,0,30" />
+          <TextBlock Text="WORKSPACE" Foreground="{DynamicResource SidebarMuted}" FontSize="9" FontWeight="SemiBold" Margin="15,0,0,10" />
+          <Button x:Name="CacheNav" Content="01   Cache review" Tag="active" Click="CacheNav_Click" Style="{StaticResource NavButton}" />
+          <Button x:Name="AnalyzeNav" Content="02   Storage explorer" Click="AnalyzeNav_Click" Style="{StaticResource NavButton}" />
+          <Button x:Name="ToolsNav" Content="03   Windows tools" Click="ToolsNav_Click" Style="{StaticResource NavButton}" />
+          <Button x:Name="HistoryNav" Content="04   Activity history" Click="HistoryNav_Click" Style="{StaticResource NavButton}" />
+          <Button x:Name="SettingsNav" Content="05   Preferences" Click="SettingsNav_Click" Style="{StaticResource NavButton}" />
+        </StackPanel>
+        <StackPanel DockPanel.Dock="Bottom">
+          <Border BorderBrush="{DynamicResource SidebarActive}" BorderThickness="1" CornerRadius="10" Padding="14">
+            <StackPanel><TextBlock Text="OPEN SOURCE" Foreground="{DynamicResource SidebarInk}" FontWeight="SemiBold" FontSize="10" /><TextBlock Text="MIT licensed. Local processing. No telemetry or background cleaning." Foreground="{DynamicResource SidebarMuted}" TextWrapping="Wrap" FontSize="11" Margin="0,8,0,0" /></StackPanel>
+          </Border><Button Content="About &amp; license" Click="About_Click" Style="{StaticResource NavButton}" Margin="0,14,0,0" />
+          <TextBlock Text="VERSION 0.2.0  /  WINDOWS" Foreground="{DynamicResource SidebarMuted}" FontSize="9" Margin="15,12,0,0" />
+        </StackPanel><Grid />
+      </DockPanel>
+    </Border>
+    <Grid Grid.Column="1" Margin="30,25,30,20">
+      <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+      <Grid Margin="0,0,0,23"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+        <StackPanel><TextBlock x:Name="PageEyebrow" Text="SCAN / REVIEW / RECYCLE" Foreground="{DynamicResource Muted}" FontSize="9" FontWeight="SemiBold" /><TextBlock x:Name="PageTitle" Text="A little space. A clearer view." FontSize="29" FontWeight="SemiBold" Margin="0,7,0,6" /><TextBlock x:Name="PageSubtitle" Text="Review older caches, with every cleanup choice in your hands." Foreground="{DynamicResource Muted}" FontSize="12" /></StackPanel>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBlock Text="APPEARANCE" Foreground="{DynamicResource Muted}" FontSize="9" Margin="0,0,0,6" /><ComboBox x:Name="ThemeCombo" Width="143" SelectionChanged="Theme_Changed" AutomationProperties.Name="Choose appearance theme" /></StackPanel>
+      </Grid>
+      <Grid Grid.Row="1">
+        <Grid x:Name="CachePage">
+          <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+          <UniformGrid Columns="3" Margin="0,0,0,16">
+            <Border Style="{StaticResource Card}" Padding="20,17" Margin="0,0,12,0"><StackPanel><TextBlock Text="CANDIDATE FILE DATA" Foreground="{DynamicResource Muted}" FontSize="9" FontWeight="SemiBold" /><TextBlock x:Name="CandidateBytesText" Text="—" FontSize="31" FontWeight="SemiBold" Margin="0,8,0,6" /><TextBlock Text="Logical size · savings may differ" Foreground="{DynamicResource Muted}" FontSize="11" /></StackPanel></Border>
+            <Border Style="{StaticResource Card}" Padding="20,17" Margin="0,0,12,0"><StackPanel><TextBlock Text="FILES TO REVIEW" Foreground="{DynamicResource Muted}" FontSize="9" FontWeight="SemiBold" /><TextBlock x:Name="FileCountText" Text="—" FontSize="31" FontWeight="SemiBold" Margin="0,8,0,6" /><TextBlock x:Name="ExclusionText" Text="21 curated cache locations" Foreground="{DynamicResource Muted}" FontSize="11" /></StackPanel></Border>
+            <Border Style="{StaticResource Card}" Background="{DynamicResource AccentSoft}" Padding="20,17"><StackPanel><TextBlock Text="SELECTED FOR RECYCLING" Foreground="{DynamicResource AccentInk}" FontSize="9" FontWeight="SemiBold" /><TextBlock x:Name="SelectedBytesText" Text="0 B" FontSize="31" FontWeight="SemiBold" Margin="0,8,0,6" /><TextBlock x:Name="SelectedCountText" Text="0 files selected" Foreground="{DynamicResource AccentInk}" FontSize="11" /></StackPanel></Border>
+          </UniformGrid>
+          <Border Grid.Row="1" Background="{DynamicResource AccentSoft}" CornerRadius="8" Padding="13,10" Margin="0,0,0,15"><TextBlock Text="Recycled files stay recoverable. Disk space is retained until you empty the Windows Recycle Bin." Foreground="{DynamicResource AccentInk}" TextWrapping="Wrap" FontSize="11" /></Border>
+          <Grid Grid.Row="2" Margin="0,0,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="155" /><ColumnDefinition Width="125" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchBox" Tag="Search cache locations…" TextChanged="Filter_Changed" ToolTip="Search cache names" AutomationProperties.Name="Search cache names" Margin="0,0,10,0" />
+            <ComboBox x:Name="CategoryCombo" Grid.Column="1" SelectionChanged="Category_Changed" Margin="0,0,10,0" AutomationProperties.Name="Filter cache category" />
+            <ComboBox x:Name="AgeCombo" Grid.Column="2" SelectionChanged="Age_Changed" Margin="0,0,10,0" AutomationProperties.Name="Minimum cache age" />
+            <Button x:Name="ScanButton" Grid.Column="3" Content="Scan caches" Click="Scan_Click" Style="{StaticResource PrimaryButton}" />
+          </Grid>
+          <Grid Grid.Row="3"><Grid.RowDefinitions><RowDefinition Height="2*" MinHeight="140" /><RowDefinition Height="Auto" /><RowDefinition Height="*" MinHeight="80" /></Grid.RowDefinitions>
+            <Border Style="{StaticResource Card}"><DataGrid x:Name="RuleGrid" ItemsSource="{Binding Rows}" SelectionChanged="RuleGrid_SelectionChanged">
+              <DataGrid.Columns>
+                <DataGridTemplateColumn Width="42"><DataGridTemplateColumn.CellTemplate><DataTemplate><CheckBox IsThreeState="False" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelect}" AutomationProperties.Name="Select cache category" /></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+                <DataGridTextColumn Header="CACHE LOCATION" Binding="{Binding Title}" Width="*" /><DataGridTextColumn Header="CATEGORY" Binding="{Binding Category}" Width="116" />
+                <DataGridTextColumn Header="FILES" Binding="{Binding CountLabel}" Width="68" /><DataGridTextColumn Header="SIZE" Binding="{Binding SizeLabel}" Width="102" />
+                <DataGridTextColumn Header="TYPE" Binding="{Binding Risk}" Width="94" /><DataGridTextColumn Header="STATUS" Binding="{Binding Status}" Width="155" />
+              </DataGrid.Columns></DataGrid></Border>
+            <Grid Grid.Row="1" Margin="0,13,0,9"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="200" /></Grid.ColumnDefinitions>
+              <StackPanel Margin="0,0,15,0"><TextBlock x:Name="DetailsTitle" Text="Inspect individual files" FontSize="15" FontWeight="SemiBold" /><TextBlock x:Name="DetailsExplanation" Text="Scan, then choose a cache category to inspect its files." Foreground="{DynamicResource Muted}" FontSize="11" TextWrapping="Wrap" Margin="0,5,0,0" /></StackPanel>
+              <StackPanel Grid.Column="1" VerticalAlignment="Center"><TextBox x:Name="FileSearchBox" Tag="Search file paths…" TextChanged="FileFilter_Changed" ToolTip="Search file paths" AutomationProperties.Name="Search file paths" /><TextBlock x:Name="FilesShownText" Foreground="{DynamicResource Muted}" FontSize="9" Margin="0,3,0,0" /></StackPanel>
+            </Grid>
+            <Border Grid.Row="2" Style="{StaticResource Card}"><DataGrid x:Name="FileGrid" RowHeight="34"><DataGrid.Columns>
+              <DataGridTemplateColumn Width="42"><DataGridTemplateColumn.CellTemplate><DataTemplate><CheckBox IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanSelect}" AutomationProperties.Name="Select file" /></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn>
+              <DataGridTextColumn Header="FILE PATH" Binding="{Binding Path}" Width="*" /><DataGridTextColumn Header="SIZE" Binding="{Binding SizeLabel}" Width="95" /><DataGridTextColumn Header="MODIFIED" Binding="{Binding ModifiedLabel}" Width="115" />
+            </DataGrid.Columns></DataGrid></Border>
+          </Grid>
+          <Grid Grid.Row="4" Margin="0,13,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"><Button x:Name="ExportButton" Content="Export JSON" Click="Export_Click" IsEnabled="False" /><Button Content="Clear selection" Click="ClearSelection_Click" Margin="9,0,0,0" /></StackPanel>
+            <Button x:Name="RecycleButton" Grid.Column="1" Content="Recycle selected" Click="Recycle_Click" Style="{StaticResource PrimaryButton}" IsEnabled="False" />
+          </Grid>
+        </Grid>
+        <Grid x:Name="AnalyzePage" Visibility="Collapsed">
+          <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+          <Border Style="{StaticResource Card}" Padding="20"><StackPanel>
+            <TextBlock Text="Choose a folder to understand its storage" FontSize="17" FontWeight="SemiBold" /><TextBlock Text="Large files and duplicate groups are advisory. Nothing in this view is automatically deleted." Foreground="{DynamicResource Muted}" Margin="0,7,0,16" TextWrapping="Wrap" />
+            <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBox x:Name="AnalysisPathBox" Tag="Choose a local folder to analyze" IsReadOnly="True" /><Button Grid.Column="1" Content="Choose folder" Click="ChooseFolder_Click" Margin="10,0,0,0" /></Grid>
+            <StackPanel Orientation="Horizontal" Margin="0,13,0,0"><ComboBox x:Name="SizeCombo" Width="130" /><CheckBox x:Name="DuplicateCheck" Content="Check duplicate content" Margin="17,0,20,0" VerticalAlignment="Center" /><Button x:Name="AnalyzeButton" Content="Analyze folder" Click="Analyze_Click" Style="{StaticResource PrimaryButton}" /></StackPanel>
+            <TextBlock Text="Duplicate checks compare SHA-256 content among files at the chosen size threshold. Up to 512 MB per file and 2 GB of total content are hashed." Foreground="{DynamicResource Muted}" FontSize="11" TextWrapping="Wrap" Margin="0,13,0,0" />
+          </StackPanel></Border>
+          <Grid Grid.Row="1" Margin="0,18,0,12"><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><TextBlock x:Name="AnalysisSummary" Text="No folder analyzed yet" FontSize="15" FontWeight="SemiBold" /><Button x:Name="AnalysisExportButton" Grid.Column="1" Content="Export analysis" Click="AnalysisExport_Click" IsEnabled="False" /></Grid>
+          <Grid Grid.Row="2"><Grid.RowDefinitions><RowDefinition Height="2*" /><RowDefinition Height="Auto" /><RowDefinition Height="*" /></Grid.RowDefinitions>
+            <Border Style="{StaticResource Card}"><DataGrid x:Name="LargeGrid"><DataGrid.Columns><DataGridTextColumn Header="LARGE FILE" Binding="{Binding Path}" Width="*" /><DataGridTextColumn Header="SIZE" Binding="{Binding SizeLabel}" Width="110" /><DataGridTextColumn Header="MODIFIED" Binding="{Binding ModifiedLabel}" Width="120" /></DataGrid.Columns></DataGrid></Border>
+            <TextBlock Grid.Row="1" Text="Matching content · review copies in their original applications" FontWeight="SemiBold" Margin="0,17,0,10" />
+            <Border Grid.Row="2" Style="{StaticResource Card}"><DataGrid x:Name="DuplicateGrid" RowHeight="NaN"><DataGrid.Columns><DataGridTemplateColumn Header="IDENTICAL FILE PATHS" Width="*"><DataGridTemplateColumn.CellTemplate><DataTemplate><TextBlock Text="{Binding PathList}" TextWrapping="Wrap" Margin="0,5" /></DataTemplate></DataGridTemplateColumn.CellTemplate></DataGridTemplateColumn><DataGridTextColumn Header="REDUNDANT DATA" Binding="{Binding SizeLabel}" Width="155" /></DataGrid.Columns></DataGrid></Border>
+          </Grid>
+        </Grid>
+        <ScrollViewer x:Name="ToolsPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+          <StackPanel Margin="0,0,10,0">
+            <Border Background="{DynamicResource WarningBg}" CornerRadius="9" Padding="16" Margin="0,0,0,16"><TextBlock Text="Advanced maintenance changes Windows settings or removes system-managed data. Review each operation. Windows will ask for administrator permission; the main app keeps running as a normal user." Foreground="{DynamicResource WarningInk}" TextWrapping="Wrap" FontSize="12" /></Border>
+            <ItemsControl x:Name="MaintenanceItems"><ItemsControl.ItemTemplate><DataTemplate>
+              <Border Style="{StaticResource Card}" Padding="20" Margin="0,0,0,12"><Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,20,0"><TextBlock Text="{Binding Title}" FontSize="16" FontWeight="SemiBold" /><TextBlock Text="{Binding Description}" TextWrapping="Wrap" Foreground="{DynamicResource Muted}" Margin="0,7,0,8" FontSize="12" /><TextBlock Text="{Binding Impact}" Foreground="{DynamicResource Muted}" TextWrapping="Wrap" FontSize="11" /></StackPanel>
+                <Button Grid.Column="1" Content="Review operation" Tag="{Binding Id}" Click="Maintenance_Click" VerticalAlignment="Center" />
+              </Grid></Border>
+            </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+            <TextBlock Text="Windows storage and recovery controls" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,12" />
+            <WrapPanel><Button Content="Storage settings / Windows.old" Tag="storage" Click="WindowsControl_Click" Margin="0,0,10,10" /><Button Content="Windows Disk Cleanup" Tag="disk-cleanup" Click="WindowsControl_Click" Margin="0,0,10,10" /><Button Content="System protection / restore points" Tag="restore" Click="WindowsControl_Click" Margin="0,0,10,10" /></WrapPanel>
+            <TextBlock Text="Deleting the previous Windows installation removes rollback support. Changing restore-point storage may discard recovery points. Review these actions inside the Windows dialogs." TextWrapping="Wrap" Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,0,0,15" />
+          </StackPanel>
+        </ScrollViewer>
+        <Grid x:Name="HistoryPage" Visibility="Collapsed"><Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+          <Border Background="{DynamicResource AccentSoft}" CornerRadius="8" Padding="15" Margin="0,0,0,18"><TextBlock Text="Each recycling run keeps a local journal. Restore recycled files in the Windows Recycle Bin. Windows maintenance output stays in its separate review window." Foreground="{DynamicResource AccentInk}" TextWrapping="Wrap" /></Border>
+          <Border Grid.Row="1" Style="{StaticResource Card}"><DataGrid x:Name="HistoryGrid"><DataGrid.Columns><DataGridTextColumn Header="RUN" Binding="{Binding DateLabel}" Width="175" /><DataGridTextColumn Header="RESULT" Binding="{Binding Status}" Width="*" /><DataGridTextColumn Header="RECYCLED" Binding="{Binding RecycledFiles}" Width="100" /><DataGridTextColumn Header="FILE DATA" Binding="{Binding SizeLabel}" Width="120" /></DataGrid.Columns></DataGrid></Border>
+          <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,15,0,0"><Button Content="Refresh history" Click="RefreshHistory_Click" /><Button Content="Open selected journal" Click="OpenJournal_Click" Margin="10,0,0,0" /><Button Content="Open Windows Recycle Bin" Click="OpenRecycleBin_Click" Margin="10,0,0,0" /></StackPanel>
+        </Grid>
+        <ScrollViewer x:Name="SettingsPage" Visibility="Collapsed" VerticalScrollBarVisibility="Auto"><StackPanel Margin="0,0,10,0">
+          <Border Style="{StaticResource Card}" Padding="22" Margin="0,0,0,16"><StackPanel><TextBlock Text="Make it feel like yours" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Choose Paper, Midnight, Evergreen, Amethyst, or follow Windows. Your theme is saved for the next launch." Foreground="{DynamicResource Muted}" TextWrapping="Wrap" Margin="0,8,0,0" /><TextBlock Text="Use the appearance menu at the top right on any page." Foreground="{DynamicResource Muted}" FontSize="11" Margin="0,12,0,0" /></StackPanel></Border>
+          <Border Style="{StaticResource Card}" Padding="22" Margin="0,0,0,16"><StackPanel><TextBlock Text="Folders to leave alone" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="Exclusions apply during both scanning and recycling. Adding an exclusion invalidates the previous selection and requires a new scan." Foreground="{DynamicResource Muted}" TextWrapping="Wrap" Margin="0,8,0,14" /><ListBox x:Name="ExclusionList" Height="150" Background="{DynamicResource SurfaceAlt}" Foreground="{DynamicResource Ink}" BorderBrush="{DynamicResource Line}" /><StackPanel Orientation="Horizontal" Margin="0,13,0,0"><Button Content="Exclude folder" Click="AddExclusion_Click" /><Button Content="Remove selected" Click="RemoveExclusion_Click" Margin="10,0,0,0" /></StackPanel></StackPanel></Border>
+          <Border Style="{StaticResource Card}" Padding="22"><StackPanel><TextBlock Text="Local by design" FontSize="18" FontWeight="SemiBold" /><TextBlock Text="No analytics, accounts, upload service, or automatic deletion. JSON exports and journals may contain personal file paths; review them before sharing." Foreground="{DynamicResource Muted}" TextWrapping="Wrap" Margin="0,8,0,13" /><TextBlock Text="Cache ages can be raised using the review toolbar. Each rule's own minimum age remains enforced." Foreground="{DynamicResource Muted}" TextWrapping="Wrap" /><Button Content="Open local data folder" Click="OpenData_Click" HorizontalAlignment="Left" Margin="0,15,0,0" /></StackPanel></Border>
+        </StackPanel></ScrollViewer>
+      </Grid>
+      <StackPanel Grid.Row="2" Margin="0,15,0,0"><ProgressBar x:Name="Activity" Height="3" IsIndeterminate="True" Foreground="{DynamicResource Accent}" Visibility="Collapsed" Margin="0,0,0,10" />
+        <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions><StackPanel Margin="0,0,15,0"><TextBlock x:Name="StatusText" Text="Ready. Nothing is selected or cleaned automatically." Foreground="{DynamicResource Muted}" FontSize="11" TextWrapping="Wrap" /><TextBlock x:Name="RunDetailText" Foreground="{DynamicResource Muted}" FontSize="10" TextWrapping="Wrap" Margin="0,4,0,0" /></StackPanel><Button x:Name="CancelButton" Grid.Column="1" Content="Stop scan" Click="Cancel_Click" Visibility="Collapsed" /></Grid>
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

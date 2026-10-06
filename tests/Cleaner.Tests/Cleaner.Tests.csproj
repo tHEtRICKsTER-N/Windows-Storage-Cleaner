@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Cleaner.Core/Cleaner.Core.csproj" /></ItemGroup>
+  <ItemGroup><Compile Include="../../src/Cleaner.App/HistoryEntry.cs" Link="HistoryEntry.cs" /></ItemGroup>
+</Project>
